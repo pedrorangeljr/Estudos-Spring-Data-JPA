@@ -2,6 +2,7 @@ package com.springdata.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,13 @@ public class AutorController {
 	public Autor salvar(@RequestBody Autor autor) {
 
 		dao.save(autor);
+		return autor;
+	}
+	
+	@PutMapping
+	public Autor atualizar(@RequestBody Autor autor) {
+
+		dao.update(autor);
 		return autor;
 	}
 }

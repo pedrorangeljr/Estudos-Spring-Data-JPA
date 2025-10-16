@@ -13,10 +13,16 @@ public class AutorDao {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Transactional(readOnly = false)
 	public void save(Autor autor) {
 
 		this.manager.persist(autor); // salvar no banco de dados
+	}
+
+	@Transactional(readOnly = false)
+	public void update(Autor autor) {
+
+		this.manager.merge(autor); // edita no banco
 	}
 }
