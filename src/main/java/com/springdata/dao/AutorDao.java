@@ -31,4 +31,10 @@ public class AutorDao {
 
 		this.manager.remove(this.manager.getReference(Autor.class, id)); // edita no banco
 	}
+	
+	@Transactional(readOnly = true)
+	public Autor findById(Long id) {
+
+		return this.manager.find(Autor.class, id);
+	}
 }
