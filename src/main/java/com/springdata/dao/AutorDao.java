@@ -25,4 +25,10 @@ public class AutorDao {
 
 		this.manager.merge(autor); // edita no banco
 	}
+	
+	@Transactional(readOnly = false)
+	public void delete(Long id) {
+
+		this.manager.remove(this.manager.getReference(Autor.class, id)); // edita no banco
+	}
 }
