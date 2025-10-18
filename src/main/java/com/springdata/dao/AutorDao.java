@@ -41,7 +41,7 @@ public class AutorDao {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Autor> findAll() {
+	public List<Autor> findAll() { // pesquisa todos
 
 		String query = "select a from Autor a";
 
@@ -49,10 +49,17 @@ public class AutorDao {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Autor> findAllByNomeOrSobrenome(String termo) {
+	public List<Autor> findAllByNomeOrSobrenome(String termo) { // pesquisa por parte da String
 
 		String query = "select a from Autor a where a.nome like :termo OR a.sobrenome like :termo";
 		return this.manager.createQuery(query, Autor.class).setParameter("termo", "%" + termo + "%").getResultList();
 
+	}
+	
+	@Transactional(readOnly = true)
+	public Long getTotalElements() { // conta a quantidade de autores no banco de dados
+		
+		String query = "select count(1) from Autor a ";
+		return this.manager.createQuery(query, Long.class).getSingleResult();
 	}
 }
