@@ -27,24 +27,32 @@ public class AutorDao {
 
 		this.manager.merge(autor); // edita no banco
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void delete(Long id) {
 
 		this.manager.remove(this.manager.getReference(Autor.class, id)); // edita no banco
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Autor findById(Long id) {
 
 		return this.manager.find(Autor.class, id);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<Autor> findAll() {
-		
+
 		String query = "select a from Autor a";
-		
+
 		return this.manager.createQuery(query, Autor.class).getResultList();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Autor> findAllByNomeOrSobrenome(String termo) {
+
+		String query = "select a from Autor a where a.nome like :termo OR a.sobrenome like :termo";
+		return this.manager.createQuery(query, Autor.class).setParameter("termo", "%" + termo + "%").getResultList();
+
 	}
 }
